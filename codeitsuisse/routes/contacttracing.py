@@ -60,11 +60,13 @@ def evaluate_contacttracing():
     if infected_genome == origin_genome:
         trace = f'{infected_name} -> {origin_name}'
         result.append((trace, 0))
+        min_alterations = 0
 
         for i in range(len(cluster_name)):
             if cluster_genome[i] == infected_genome:
                 trace = f'{infected_name} -> {cluster_name[i]}'
                 result.append((trace, 0))   
+                min_alterations = 0
     else:
         # handle clusters
         for i in range(len(cluster_name)):
