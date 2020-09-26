@@ -42,7 +42,7 @@ def evaluate_gmo():
         
         num_cc = 0
         num_acgt = min(a_count, c_count, g_count, t_count) - 1
-        if num_acgt % 2 != 0: # odd num of acgt
+        if num_acgt % 2 != 0 and c_count % 2 == 0: # odd num of acgt but even number of C
             num_acgt -= 1
         num_cc = math.floor((c_count-num_acgt)/2)     
 
