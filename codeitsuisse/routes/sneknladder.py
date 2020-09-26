@@ -87,7 +87,6 @@ def evaluate_slsm():
         dice_rolls += [1] * (last) # give 1 for all other players
         best_pos, best_roll, mirror, smoke = go_next(player_pos[last], False)
         player_pos[last] = best_pos
-        print('here', player_pos[last])
         dice_rolls.append(best_roll)
         while mirror == True or smoke == True:
             if mirror:
@@ -98,7 +97,6 @@ def evaluate_slsm():
                 player_pos[last] = best_pos
                 dice_rolls.append(best_roll)
                 best_pos, best_roll, mirror, smoke = go_next(player_pos[last], True)
-            print('there', player_pos[last])
     
     logging.info("My result :{}".format(dice_rolls))
     return json.dumps(dice_rolls)
