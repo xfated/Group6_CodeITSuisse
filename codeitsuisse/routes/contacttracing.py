@@ -14,22 +14,22 @@ def evaluate_contacttracing():
     logging.info("data sent for evaluation {}".format(data))
 
     def alterations(genome1, genome2): # count number of alterations btw genome1 and genome2, but if instruction is changed totally, return 999
-        genome1 = genome1.split('-')
-        genome2 = genome2.split('-')
+        # genome1 = genome1.split('-')
+        # genome2 = genome2.split('-')
         res = 0
-        # for i in range(len(genome1)):
-        #     if genome1[i] != genome2[i]:
-        #         res += 1
         for i in range(len(genome1)):
-            for j in range(len(genome1[0])):
-                if genome1[i][j] != genome2[i][j]:
-                    res += 1   
-            shared = sum((Counter(genome1[i]) & Counter(genome2[i])).values())
-            if genome1[i] != genome2[i] and shared >= 1:
+            if genome1[i] != genome2[i]:
                 res += 1
-            elif shared == 0:
-                res += 999
-                break
+        # for i in range(len(genome1)):
+        #     for j in range(len(genome1[0])):
+        #         if genome1[i][j] != genome2[i][j]:
+        #             res += 1   
+        #     shared = sum((Counter(genome1[i]) & Counter(genome2[i])).values())
+        #     if genome1[i] != genome2[i] and shared >= 1:
+        #         res += 1
+        #     elif shared == 0:
+        #         res += 999
+        #         break
         return res
     
     def nonsilent(genome1, genome2):
@@ -55,7 +55,7 @@ def evaluate_contacttracing():
         cluster_genome.append(i['genome'])
 
     result = []
-    min_alterations = 10
+    min_alterations = 20
 
     if infected_genome == origin_genome:
         trace = f'{infected_name} -> {origin_name}'
@@ -83,6 +83,7 @@ def evaluate_contacttracing():
             result.append((trace, min_alterations))
             
         if alterations(infected_genome, origin_genome) <= min_alterations: 
+            min_alterations = alterations(infected_genome, origin_genome)
             if nonsilent(infected_genome, origin_genome):
                 trace = f'{infected_name}* -> {origin_name}'
             else:
