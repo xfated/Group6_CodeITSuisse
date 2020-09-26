@@ -20,7 +20,9 @@ def evaluate_babylon():
     days = data['days']
 
     all_indexes = set([i for i in range(numBooks)])
-
+    
+    books.sort()
+    
     day_choices = {}
     possibleCombi = {}
     for i in range(numDays):
