@@ -2,6 +2,7 @@ import logging
 import json
 from shapely.geometry import Polygon, LineString
 from shapely.geometry.multilinestring import MultiLineString
+import collections
 
 from flask import request, jsonify;
 
@@ -44,14 +45,14 @@ def evaluate_revisitgeometry():
         shapely_poly = Polygon(shape)
     shapely_line = LineString(line)
 
-    # intersection_line = []
-    # if type(shapely_poly.intersection(shapely_line)) is MultiLineString:
-    #     for inte in shapely_poly.intersection(shapely_line):
-    #         intersection_line += list(inte.coords)
-    # else:
-    #     intersection_line = list(shapely_poly.intersection(shapely_line).coords)
-    # intersection_line = list(set(intersection_line))
-    intersection_line = list(shapely_poly.intersection(shapely_line).coords)
+    intersection_line = []
+    if type(shapely_poly.intersection(shapely_line)) is MultiLineString:
+        for inte in shapely_poly.intersection(shapely_line):
+            intersection_line += list(inte.coords)
+        intersection_line = [item for item, count in collections.Counter(intersection_line).items() if count > 1]
+    else:
+        intersection_line = list(shapely_poly.intersection(shapely_line).coords)
+    # intersection_line = list(shapely_poly.intersection(shapely_line).coords)
 
     result = []
     for i in intersection_line:
