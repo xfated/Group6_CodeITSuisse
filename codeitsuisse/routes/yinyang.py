@@ -54,7 +54,7 @@ def evaluate_yinyang():
                 if seq[element_count - p_i - 1] == desired_char:
                     yang_indexes.add(element_count - p_i - 1)
             p_Y = possible_yang / len(seq)
-            print(seq, p_Y)
+            # print(seq, p_Y)
             tried[(seq, desired_char)] = (p_Y, yang_indexes)
             tried[(seq[::-1], desired_char)] = (p_Y, yang_indexes)
         
