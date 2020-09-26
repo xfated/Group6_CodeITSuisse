@@ -51,8 +51,12 @@ def evaluate_gmo():
         while len(new_seq) < gene_len:
             if a_inserted == False:
                 if a_count >= 2:
-                    new_seq += 'AA'
-                    a_count -= 2
+                    if num_acgt > 0:
+                        new_seq += 'A'
+                        a_count -= 1
+                    else:
+                        new_seq += 'AA'
+                        a_count -= 2
                 elif a_count == 1:
                     new_seq += 'A'
                     a_count -= 1
