@@ -34,7 +34,7 @@ def evaluate_portfolio():                              ## Main Function
         for j in index:                         #loop thru the indexes 
             ratio =  j["CoRelationCoefficient"] * (port_vol / j["FuturePrcVol"])
             round_ratio = round(ratio,3)
-            future_pro = ratio*value/(j["IndexFuturePrice"] * j["Notional"])
+            future_pro = round_ratio*value/(j["IndexFuturePrice"] * j["Notional"])
             future_round = round(future_pro)
             name = j['Name']
             vol = j['FuturePrcVol']                              
@@ -48,10 +48,10 @@ def evaluate_portfolio():                              ## Main Function
                 # this future has lower vol or ratio
                 elif lowest['Vol'] > vol and lowest['ratio_comp'] < ratio :
                     #compare lowest number of futures proportion 
-                    if lowest['fut_compare'] > future_pro:
+                    if lowest['fut'] > future_round:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
                 elif lowest['Vol'] < vol and lowest['ratio_comp'] > ratio:
-                    if lowest['fut_compare'] > future_pro:
+                    if lowest['fut'] > future_round:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
         
         best_index['HedgePositionName'] = lowest['Name']
