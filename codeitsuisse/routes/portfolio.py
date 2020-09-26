@@ -21,8 +21,6 @@ def evaluate_portfolio():                              ## Main Function
         return math.ceil(expoN) / 10 ** decimals
 
     def normal(n):
-        if n - math.floor(n) < 0.5:
-            return math.floor(n)
         return math.ceil(n)
 
 
@@ -56,18 +54,18 @@ def evaluate_portfolio():                              ## Main Function
                 lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['fut'] = name, vol, round_ratio, future_round, ratio, future_pro
             else:
                 # this future has lower vol and ratio
-                if lowest['Vol'] > vol and lowest['ratio'] > round_ratio:     
+                if lowest['Vol'] > vol and lowest['Ratio'] > ratio:     
                     lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['future'] = name, vol, round_ratio, future_round, ratio, future_pro
                 # this future has lower vol or ratio
-                elif lowest['Vol'] > vol and lowest['ratio'] < round_ratio :
-                    if lowest['fut'] > future_round:
+                elif lowest['Vol'] > vol and lowest['Ratio'] < ratio :
+                    if lowest['Fut'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['future'] = name, vol, round_ratio, future_round, ratio, future_pro
-                elif lowest['Vol'] < vol and lowest['ratio'] > round_ratio:
-                    if lowest['fut'] > future_round:
+                elif lowest['Vol'] < vol and lowest['Ratio'] > ratio:
+                    if lowest['Fut'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['future'] = name, vol, round_ratio, future_round, ratio, future_pro
                 # Same metrics 
-                elif lowest['Vol'] == vol and lowest['ratio'] == round_ratio:
-                    if lowest['fut'] > future_round:
+                elif lowest['Vol'] == vol or lowest['Ratio'] == ratio:
+                    if lowest['Fut'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['future'] = name, vol, round_ratio, future_round, ratio, future_pro
 
 
