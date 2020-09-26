@@ -70,8 +70,7 @@ def evaluate_yinyang():
 
         # print(prevProb, p_Y)
         new_sum = sum
-        split = 1/len(yang_indexes)
-        
+    
         if desired_char == "Y":
             new_sum  += prevProb * p_Y
             
@@ -80,15 +79,20 @@ def evaluate_yinyang():
         #         new_sum += p_Y
         
         sums = 0
+        new_sets = set()
         for index in yang_indexes:
             new_seq = seq[:index]+seq[index+1:]
+            new_sets.add(new_seq)
             # val = 0
             # if (split, p_Y, new_seq, picks_left, sum, yinCount, yangCount) in tried.keys():
             #     val = tried[(split, p_Y, new_seq, picks_left, sum, yinCount, yangCount)]
             # else:
-            sums += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = prevProb*p_Y*split)
                 # tried[frozenset((split, p_Y, new_seq, picks_left, sum, yinCount, yangCount))] = val
             # new_sum += val
+        for new_seq in new_sets:
+            split = 1/len(new_sets)
+            sums += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = prevProb*p_Y*split)
+            
         new_sum += sums
 
         return new_sum
