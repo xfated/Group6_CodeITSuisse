@@ -11,8 +11,5 @@ import codeitsuisse.routes.portfolio
 import codeitsuisse.routes.clean_floor
 import codeitsuisse.routes.cluster
 import codeitsuisse.routes.socialdistance
-<<<<<<< HEAD
 import codeitsuisse.routes.sneknladder
-=======
 import codeitsuisse.routes.inventory
->>>>>>> 312d57d12783a654a5878c7b271b83fbd010af34
