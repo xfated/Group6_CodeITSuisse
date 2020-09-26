@@ -32,8 +32,7 @@ def evaluate_portfolio():                              ## Main Function
 
         lowest = {}
         for j in index:                         #loop thru the indexes 
-            ratio =  j["CoRelationCoefficient"] * (port_vol / j["FuturePrcVol"])
-            round_ratio = round(ratio,3)
+            ratio =  round(j["CoRelationCoefficient"] * (port_vol / j["FuturePrcVol"]),3)
             future_pro = round(round_ratio*value/(j["IndexFuturePrice"] * j["Notional"]))
             name = j['Name']
             vol = j['FuturePrcVol']                              
@@ -61,4 +60,4 @@ def evaluate_portfolio():                              ## Main Function
     # publish result
     logging.info("My result :{}".format(output))
     result = { "outputs": output}
-    return json.dumps(result)
+    return json.dumps(result) 
