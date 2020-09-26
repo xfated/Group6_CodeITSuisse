@@ -57,7 +57,7 @@ def evaluate_yinyang():
             tried[(seq[::-1], desired_char)] = (p_Y, yang_indexes)
         
 
-        if picks_left == 1 or prevProb < 0.0001:
+        if picks_left == 1 or prevProb < 0.000000001:
             # print(seq, yang_indexes, desired_char)
             if desired_char == "Y":
                 print(seq, prevProb)
