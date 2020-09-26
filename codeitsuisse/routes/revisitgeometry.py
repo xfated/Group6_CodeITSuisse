@@ -58,9 +58,8 @@ def evaluate_revisitgeometry():
         y = round(i[1], 2)
         
         if x % 1 == 0.0:
-        
             x = round(x)
-        if x % 1 == 0.0:
+        if y % 1 == 0.0:
             y = round(y)
         result.append({'x': x, 'y': y})
     
