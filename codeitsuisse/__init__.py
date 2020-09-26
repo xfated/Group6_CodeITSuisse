@@ -9,4 +9,5 @@ import codeitsuisse.routes.gmo
 import codeitsuisse.routes.revisitgeometry
 import codeitsuisse.routes.portfolio
 import codeitsuisse.routes.clean_floor
+import codeitsuisse.routes.cluster
 
