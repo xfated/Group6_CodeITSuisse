@@ -7,7 +7,7 @@ from codeitsuisse import app;
 
 logger = logging.getLogger(__name__)
 
-@app.route('/optimizeportfolio', methods=['POST'])
+@app.route('/optimizedportfolio', methods=['POST'])
 
 def evaluate_portfolio():                              ## Main Function
     data = request.get_json()
