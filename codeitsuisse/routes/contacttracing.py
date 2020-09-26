@@ -61,33 +61,33 @@ def evaluate_contacttracing():
         trace = f'{infected_name} -> {origin_name}'
         result.append((trace, 0))
 
-        # for i in range(len(cluster_name)):
-        #     if cluster_genome[i] == infected_genome:
-        #         trace = f'{infected_name} -> {cluster_name[i]}'
-        #         result.append(trace)   
-    
-    # handle clusters
-    for i in range(len(cluster_name)):
-        if alterations(infected_genome, cluster_genome[i]) <= min_alterations:
-            min_alterations = alterations(infected_genome, cluster_genome[i])
-            if nonsilent(infected_genome, cluster_genome[i]):
-                trace = f'{infected_name}* -> {cluster_name[i]}'
-            else:
+        for i in range(len(cluster_name)):
+            if cluster_genome[i] == infected_genome:
                 trace = f'{infected_name} -> {cluster_name[i]}'
-        
-        if alterations(cluster_genome[i], origin_genome) <= min_alterations:
-            if nonsilent(cluster_genome[i], origin_genome):
-                trace += f'* -> {origin_name}'
+                result.append((trace, 0))   
+    else:
+        # handle clusters
+        for i in range(len(cluster_name)):
+            if alterations(infected_genome, cluster_genome[i]) <= min_alterations:
+                min_alterations = alterations(infected_genome, cluster_genome[i])
+                if nonsilent(infected_genome, cluster_genome[i]):
+                    trace = f'{infected_name}* -> {cluster_name[i]}'
+                else:
+                    trace = f'{infected_name} -> {cluster_name[i]}'
+            
+            if alterations(cluster_genome[i], origin_genome) <= min_alterations:
+                if nonsilent(cluster_genome[i], origin_genome):
+                    trace += f'* -> {origin_name}'
+                else:
+                    trace += f' -> {origin_name}'
+            result.append((trace, min_alterations))
+            
+        if alterations(infected_genome, origin_genome) <= min_alterations: 
+            if nonsilent(infected_genome, origin_genome):
+                trace = f'{infected_name}* -> {origin_name}'
             else:
-                trace += f' -> {origin_name}'
-        result.append((trace, min_alterations))
-        
-    if alterations(infected_genome, origin_genome) <= min_alterations: 
-        if nonsilent(infected_genome, origin_genome):
-            trace = f'{infected_name}* -> {origin_name}'
-        else:
-            trace = f'{infected_name} -> {origin_name}'
-        result.append((trace, 0))
+                trace = f'{infected_name} -> {origin_name}'
+            result.append((trace, 0))
     
     new_result = []
     for trace, alterations in result:
