@@ -8,7 +8,6 @@ from codeitsuisse import app;
 logger = logging.getLogger(__name__)
 
 @app.route('/salad-spree', methods=['POST'])
-
 def evaluate_saladspree():                              ## Main Function
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
@@ -57,20 +56,44 @@ def evaluate_saladspree():                              ## Main Function
                                 min_sum = temp
                 return min_sum
 
-    for i in streets:
-        consec, stores = consec_num(n,i)
-        if len(i) - count_X(i) < n:                 #if street does not have enough salads
-            temp = 0
-        elif consec < n:                            #check if have enough consecutive stores
-            temp = 0                             
-        else:
-            cost = get_cheapest_consec(n,stores)
-            if cost < final_cost:
-                final_cost = cost
-                
-    if final_cost == 10000000000:
-        final_cost = temp
+    cheapest = 10000000000000000
+    # for i in streets:
+        # consec, stores = consec_num(n,i)
+        # if len(i) - count_X(i) < n:                 #if street does not have enough salads
+        #     temp = 0
+        # elif consec < n:                            #check if have enough consecutive stores
+        #     temp = 0                             
+        # else:
+        #     cost = get_cheapest_consec(n,stores)
+        #     if cost < final_cost:
+        #         final_cost = cost
 
+    for street in streets:
+        cur_cost = 0
+        count = 0
+        for j in range(len(street)):
+            if street[j] != 'X':
+                cur_cost += int(street[j])
+                count += 1
+                if count == n:
+                    if cur_cost < cheapest:
+                        cheapest = cur_cost
+                elif count > n:
+                    cur_cost -= int(street[j-n])
+                    if cur_cost < cheapest:
+                        cheapest = cur_cost
+            else:
+                print(cur_cost)
+                if cur_cost < cheapest and count == n:
+                    cheapest = cur_cost
+                cur_cost = 0
+                count = 0
+        
+                
+    if cheapest == 10000000000000000:
+        final_cost = 0
+    else:
+        final_cost = cheapest
     # publish result
     logging.info("result: {}".format(final_cost))
     result = {"result": final_cost}
