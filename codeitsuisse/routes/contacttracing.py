@@ -16,7 +16,7 @@ def evaluate_contacttracing():
     def alterations(genome1, genome2): # count number of alterations btw genome1 and genome2, but if instruction is changed totally, return 999
         genome1 = genome1.split('-')
         genome2 = genome2.split('-')
-        # res = 0
+        res = 0
         # for i in range(len(genome1)):
         #     if genome1[i] != genome2[i]:
         #         res += 1
