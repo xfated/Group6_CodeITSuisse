@@ -33,9 +33,9 @@ def evaluate_revisitgeometry():
     new_y = ((999 - line[1][0]) * grad) + line[1][1]
     new_coor = (999, new_y)
     line.append(new_coor)
-    new_y2 = ((-999 - line[1][0]) * grad) + line[1][1]
-    new_coor2 = (-999, new_y2)
-    line.append(new_coor2)
+    # new_y2 = ((-999 - line[1][0]) * grad) + line[1][1]
+    # new_coor2 = (-999, new_y2)
+    # line.append(new_coor2)
 
     if len(shape) == 2:
         shapely_poly = LineString(shape)
