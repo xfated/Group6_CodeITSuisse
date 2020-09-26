@@ -16,6 +16,7 @@ def evaluate_saladspree():                              ## Main Function
     #get data
     n = data['number_of_salads']
     streets = data["salad_prices_street_map"]
+    final_cost = 10000000000
 
     def count_X(street):
         count = street.count('X')
@@ -56,7 +57,6 @@ def evaluate_saladspree():                              ## Main Function
                                 min_sum = temp
                 return min_sum
 
-    final_cost = 10000000000
     for i in streets:
         consec, stores = consec_num(n,i)
         if len(i) - count_X(i) < n:                 #if street does not have enough salads
@@ -73,7 +73,7 @@ def evaluate_saladspree():                              ## Main Function
 
     # publish result
     logging.info("result: {}".format(final_cost))
-    result = {"result" : final_cost}
+    result = {"result": final_cost}
     return json.dumps(result)
 
 
