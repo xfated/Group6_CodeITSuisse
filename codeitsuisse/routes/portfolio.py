@@ -1,5 +1,6 @@
 import logging
 import json
+import math
 
 from flask import request, jsonify;
 
@@ -12,6 +13,13 @@ logger = logging.getLogger(__name__)
 def evaluate_portfolio():                              ## Main Function
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
+
+    def normal_round(n, decimals=0):
+        expoN = n * 10 ** decimals
+        if abs(expoN) - abs(math.floor(expoN)) < 0.5:
+            return math.floor(expoN) / 10 ** decimals
+        return math.ceil(expoN) / 10 ** decimals
+
 
     #get data
     inputs = data['inputs']
@@ -33,9 +41,9 @@ def evaluate_portfolio():                              ## Main Function
         lowest = {}
         for j in index:                         #loop thru the indexes 
             ratio =  j["CoRelationCoefficient"] * (port_vol / j["FuturePrcVol"])
-            round_ratio = round(ratio,3)
+            round_ratio = normal_round(ratio,3)
             future_pro = round_ratio*value/(j["IndexFuturePrice"] * j["Notional"])
-            future_round = round(future_pro)
+            future_round = normal_round(future_pro)
             name = j['Name']
             vol = j['FuturePrcVol']                              
 
