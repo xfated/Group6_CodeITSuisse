@@ -34,7 +34,7 @@ def evaluate_portfolio():                              ## Main Function
         for j in index:                         #loop thru the indexes 
             ratio =  j["CoRelationCoefficient"] * (port_vol / j["FuturePrcVol"])
             round_ratio = round(ratio,3)
-            future_pro = round_ratio*value/(j["IndexFuturePrice"] * j["Notional"])
+            future_pro = ratio*value/(j["IndexFuturePrice"] * j["Notional"])
             future_round = round(future_pro)
             name = j['Name']
             vol = j['FuturePrcVol']                              
