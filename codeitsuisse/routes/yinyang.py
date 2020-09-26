@@ -39,9 +39,8 @@ def evaluate_yinyang():
             desired_char = 'y'
             yinCount -= 1 
         # element_count = no_Elements - pick_no + 1
-        if seq in tried.keys():
-            p_Y = tried[seq][0]
-            yang_indexes = tried[seq][1]
+        if (seq, desired_char) in tried.keys():
+            p_Y, yang_indexes = tried[(seq, desired_char)]
         else:
             for p_i in range(0, element_count): # p_i = possible index. == number of elements left
                 if seq[p_i] == desired_char or seq[element_count - p_i - 1] == desired_char:
@@ -51,10 +50,10 @@ def evaluate_yinyang():
                 if seq[element_count - p_i - 1] == desired_char:
                     yang_indexes.add(element_count - p_i - 1)
             p_Y = possible_yang / len(seq)
-            tried[seq] = (p_Y, yang_indexes)
-            tried[seq[::-1]] = (p_Y, yang_indexes)
-        
-        if picks_left == 1:
+            tried[(seq, desired_char)] = (p_Y, yang_indexes)
+            tried[(seq[::-1], desired_char)] = (p_Y, yang_indexes)
+        if picks_left == 1 or Y_count <= y_count + 1:
+            # print(seq, yang_indexes, desired_char)
             return p_Y
         
         new_sum = sum
