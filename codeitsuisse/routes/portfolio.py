@@ -45,14 +45,14 @@ def evaluate_portfolio():                              ## Main Function
                 # this future has lower vol and ratio
                 if lowest['Vol'] > vol and lowest['Ratio'] > ratio:     
                     lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
-                # this future has lower vol or ratio
-                elif lowest['Vol'] > vol and lowest['Ratio'] < ratio:
+                # this future has either lower vol or ratio
+                elif (lowest['Vol'] > vol and lowest['Ratio'] < ratio) or (lowest['Vol'] < vol and lowest['Ratio'] > ratio):
                     #compare lowest number of futures proportion 
                     if lowest['Fut'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
-                elif lowest['Vol'] < vol and lowest['Ratio'] > ratio:
-                    if lowest['Fut'] > future_pro:
-                        lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
+                # elif lowest['Vol'] < vol and lowest['Ratio'] > ratio:
+                #     if lowest['Fut'] > future_pro:
+                #         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
         
         best_index['HedgePositionName'] = lowest['Name']
         best_index['OptimalHedgeRatio'] = lowest['Ratio']
