@@ -35,8 +35,8 @@ def evaluate_portfolio():                              ## Main Function
         port = i['Portfolio']
         index = i['IndexFutures']
         
-        #Consider only between volatility of futures and ratio for conclusion
-        #Port details
+        #Consider only between volatility of futures and ratio first 
+        #Portfolio details
         value = port['Value']
         port_vol = port['SpotPrcVol']
         best_index = {}
@@ -45,7 +45,7 @@ def evaluate_portfolio():                              ## Main Function
         for j in index:                         #loop thru the indexes 
             ratio =  j["CoRelationCoefficient"] * (port_vol / j["FuturePrcVol"])
             round_ratio = normal_round(ratio,3)
-            future_pro = round_ratio*value/(j["IndexFuturePrice"] * j["Notional"])
+            future_pro = ratio*value/(j["IndexFuturePrice"] * j["Notional"])
             future_round = normal(future_pro)
             name = j['Name']
             vol = j['FuturePrcVol']                              
@@ -54,18 +54,18 @@ def evaluate_portfolio():                              ## Main Function
                 lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['fut'] = name, vol, round_ratio, future_round, ratio, future_pro
             else:
                 # this future has lower vol and ratio
-                if lowest['Vol'] > vol and lowest['Ratio'] > ratio:     
+                if lowest['Vol'] > vol and lowest['Ratio'] > round_ratio:     
                     lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['future'] = name, vol, round_ratio, future_round, ratio, future_pro
                 # this future has lower vol or ratio
-                elif lowest['Vol'] > vol and lowest['Ratio'] < ratio :
-                    if lowest['Fut'] > future_pro:
+                elif lowest['Vol'] > vol and lowest['Ratio'] < round_ratio :
+                    if lowest['Fut'] > future_round:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['future'] = name, vol, round_ratio, future_round, ratio, future_pro
-                elif lowest['Vol'] < vol and lowest['Ratio'] > ratio:
-                    if lowest['Fut'] > future_pro:
+                elif lowest['Vol'] < vol and lowest['Ratio'] > round_ratio:
+                    if lowest['Fut'] > future_round:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['future'] = name, vol, round_ratio, future_round, ratio, future_pro
                 # Same metrics 
-                elif lowest['Vol'] == vol or lowest['Ratio'] == ratio:
-                    if lowest['Fut'] > future_pro:
+                elif lowest['Vol'] == vol or lowest['Ratio'] == round_ratio:
+                    if lowest['Fut'] > future_round:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'], lowest['ratio'], lowest['future'] = name, vol, round_ratio, future_round, ratio, future_pro
 
 
