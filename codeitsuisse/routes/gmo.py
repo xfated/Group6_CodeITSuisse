@@ -40,10 +40,13 @@ def evaluate_gmo():
             elif char == 'T':
                 t_count += 1
         
-        num_cc = math.floor((c_count)/2)
-        num_acgt = min(a_count, c_count - num_cc * 2, g_count, t_count)
-        
-        num_aa = math.floor(a_count/2)
+        num_cc = 0
+        num_acgt = min(a_count, c_count, g_count, t_count) - 1
+        if num_acgt % 2 != 0: # odd num of acgt
+            num_acgt -= 1
+        num_cc = math.floor((c_count-num_acgt)/2)     
+
+        print(num_acgt, num_cc)
 
         new_seq = ''
         a_inserted = False
