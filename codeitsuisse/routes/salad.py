@@ -17,6 +17,45 @@ def evaluate_saladspree():                              ## Main Function
     n = data['number_of_salads']
     streets = data["salad_prices_street_map"]
 
+    def count_X(street):
+        count = street.count('X')
+        return count
+
+    def consec_num(n,street):
+        final_num = 0
+        temp = 0
+        list_of_stores = []
+        store = []
+        for i in street:
+            if i != 'X':
+                temp += 1
+                store.append(i)
+            else:
+                if temp > final_num:
+                    final_num = temp
+                    temp = 0
+                    list_of_stores.append(store)
+                    store = []
+        return final_num, list_of_stores
+
+    def get_cheapest_consec(n,street):
+        min_sum = 1000000000
+        for i in street:
+            temp = 0
+            if len(i) == n:                         #only this consec stores
+                for j in i:
+                    temp += int(j)
+                min_sum = temp
+                return min_sum
+            elif len(i) > n:                        #stores more than n 
+                for x in range(len(i)):
+                    if n + x < len(i):
+                        for y in i[x:n+x]:
+                            temp += int(y)
+                            if temp < min_sum:
+                                min_sum = temp
+                return min_sum
+
     final_cost = 10000000000
     for i in streets:
         consec, stores = consec_num(n,i)
@@ -34,48 +73,11 @@ def evaluate_saladspree():                              ## Main Function
 
     # publish result
     logging.info("result: {}".format(final_cost))
-    result = { "result" : final_cost}
+    result = {"result" : final_cost}
     return json.dumps(result)
 
 
-def count_X(street):
-    count = street.count('X')
-    return count
 
-def consec_num(n,street):
-    final_num = 0
-    temp = 0
-    list_of_stores = []
-    store = []
-    for i in street:
-        if i != 'X':
-            temp += 1
-            store.append(i)
-        else:
-            if temp > final_num:
-                final_num = temp
-                temp = 0
-                list_of_stores.append(store)
-                store = []
-    return final_num, list_of_stores
-
-def get_cheapest_consec(n,street):
-    min_sum = 1000000000
-    for i in street:
-        temp = 0
-        if len(i) == n:                         #only this consec stores
-            for j in i:
-                temp += int(j)
-            min_sum = temp
-            return min_sum
-        elif len(i) > n:                        #stores more than n 
-            for x in range(len(i)):
-                if n + x < len(i):
-                    for y in i[x:n+x]:
-                        temp += int(y)
-                        if temp < min_sum:
-                            min_sum = temp
-            return min_sum
             
 
 
