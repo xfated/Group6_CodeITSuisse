@@ -9,7 +9,7 @@ from codeitsuisse import app;
 logger = logging.getLogger(__name__)
 
 @app.route('/contacttracing', methods=['POST'])
-def evaluate():
+def evaluate_contacttracing():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
 
