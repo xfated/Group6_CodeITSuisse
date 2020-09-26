@@ -82,7 +82,7 @@ def evaluate_gmo():
         gene_result['geneSequence'] = new_seq
         output['list'].append(gene_result)
     logging.info("My result :{}".format(output))
-    return json.dumps(output)
+    return jsonify(output)
 
 
 
