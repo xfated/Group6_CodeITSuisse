@@ -99,7 +99,7 @@ def evaluate_yinyang():
             # new_sum += val
         for new_seq in new_sets.keys():
             split = new_sets[new_seq]/total
-            print(new_seq, split)
+            # print(new_seq, split)
             sums += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = prevProb*p_Y*split)
             
         new_sum += sums
