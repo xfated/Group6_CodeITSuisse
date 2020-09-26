@@ -33,7 +33,7 @@ def evaluate_portfolio():                              ## Main Function
         lowest = {}
         for j in index:                         #loop thru the indexes 
             ratio =  round(j["CoRelationCoefficient"] * (port_vol / j["FuturePrcVol"]),3)
-            future_pro = round(ratio/(j["IndexFuturePrice"] * j["Notional"]))
+            future_pro = ratio/(j["IndexFuturePrice"] * j["Notional"])
             name = j['Name']
             vol = j['FuturePrcVol']                              
             if not any(lowest):
@@ -53,7 +53,7 @@ def evaluate_portfolio():                              ## Main Function
         
         best_index['HedgePositionName'] = lowest['Name']
         best_index['OptimalHedgeRatio'] = lowest['Ratio']
-        best_index['NumFuturesContract'] = lowest['Fut'] * value
+        best_index['NumFuturesContract'] = round(lowest['Fut'] * value)
         output.append(best_index)
 
     # publish result
