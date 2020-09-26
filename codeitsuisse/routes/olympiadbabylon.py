@@ -18,16 +18,30 @@ def evaluate_babylon():
     books = data['books']
     days = data['days']
 
-    # get books in dict
-    book_dict = {}
-    for i in range(len(books)):
-        book_dict[i] = books[i]
-     
+    books.sort()
+    days.sort()
 
-    result = 0
+    print(books)
+    print(days)
+    
+    optim_no = 0
+    used_indexes = set()
+
+    j = 0
+    for time in days:
+        current_sum = 0
+        for i in range(j,numBooks):
+            print(i)
+            if current_sum + books[i] < time:
+                current_sum += books[i]
+                used_indexes.add(i)
+                print(time, books[i])
+                j = i + i
+    optim_no = len(used_indexes)
 
     # publish result
-    logging.info("My result :{}".format(result))
+    logging.info("My result :{}".format(optim_no))
+    result = { "optimalNumberOfBooks" : optim_no}
     return json.dumps(result)
 
 

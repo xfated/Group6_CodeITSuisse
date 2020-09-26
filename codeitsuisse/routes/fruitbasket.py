@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 
 @app.route('/fruitbasket', methods=['POST'])
 def evaluate_fruitbasket():
-    print(request)
-    data = request.get_json()
+    data = request.get_data()
     logging.info("data sent for evaluation {}".format(data))
 
     estimate = 0
