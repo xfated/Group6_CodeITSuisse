@@ -35,7 +35,7 @@ def evaluate_cluster():
                             infectious = True
                         other_pos = (row+1)*cols + col+1
                         ufds.union(center_pos, other_pos, infectious)
-                        found_parter = True
+                        found_partner = True
                 if (col != cols-1):
                     # right
                     if area[row][col+1] != "*":
@@ -43,7 +43,7 @@ def evaluate_cluster():
                             infectious = True
                         other_pos = (row)*cols + col+1+1
                         ufds.union(center_pos, other_pos, infectious)
-                        found_parter = True
+                        found_partner = True
                 if (col != cols-1) and (row != rows-1):
                     # diagonal right
                     if area[row+1][col+1] != "*":
@@ -51,7 +51,7 @@ def evaluate_cluster():
                             infectious = True
                         other_pos = (row+1)*cols + col+1+1
                         ufds.union(center_pos, other_pos, infectious)
-                        found_parter = True
+                        found_partner = True
                 if (col != 0) and (row != rows-1):
                     # diagonal left
                     if area[row+1][col-1] != "*":
@@ -59,12 +59,13 @@ def evaluate_cluster():
                             infectious = True
                         other_pos = (row+1)*cols + col-1+1
                         ufds.union(center_pos, other_pos, infectious)
-                        found_parter = True
+                        found_partner = True
                 if found_partner == False:
                     ufds.union(center_pos, center_pos, infectious)
 
 
     clusters = 0
+    print(ufds.clusters)
     for key in ufds.clusters.keys():
         if ufds.clusters[key] == True:
             clusters += 1
@@ -116,10 +117,8 @@ class UnionFind:
                 if self.rank[x] == self.rank[y]: self.rank[y] += 1
             self.groups -= 1
         else:
-            if y in self.clusters.keys():
-                self.clusters.pop(y)
             if x in self.clusters.keys():
-                if self.clusters[x] != True:
+                if self.clusters[x] == False:
                     if infectious:
                         self.clusters[x] = True
             else:
