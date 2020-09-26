@@ -13,10 +13,10 @@ def evaluate_gmo():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     
-    id = data['id']
+    id = data['runId']
     sequences = data['list']
     output = {}
-    output['id'] = id
+    output['runId'] = id
     output['list'] = []
     for sequence in sequences:
         seq_id = sequence['id']
