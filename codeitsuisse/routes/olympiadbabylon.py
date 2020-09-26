@@ -55,6 +55,7 @@ def evaluate_babylon():
         book_indexes = key[1:]
         if not (optim_set & set(book_indexes)) and day not in settled_days:  # no common index and day not settled
             optim_set = optim_set.union(set(book_indexes))
+            settled_days.append(day)
     optim_no = len(optim_set)
             
     # queue = day_choices[0]
