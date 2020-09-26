@@ -41,7 +41,7 @@ def evaluate_inventory():
         
         itemLst = sorted(itemLst, key=operator.itemgetter(1, 0))
         itemLst = [x[0] for x in itemLst][:10]
-        result = {'searchItemName': d['searchItemName'], 'searchResult': itemLst}
+        result = {'searchItemName':d['searchItemName'],'searchResult':itemLst}
         resLst.append(result)
 
     logging.info("My result :{}".format(resLst))
