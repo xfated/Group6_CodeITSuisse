@@ -45,7 +45,8 @@ def evaluate_yinyang():
         if (seq, desired_char) in tried.keys():
             p_Y, yang_indexes = tried[(seq, desired_char)]
         else:
-            for p_i in range(0, int(element_count+1/2)): # p_i = possible index. == number of elements left
+            for p_i in range(0, int(element_count)): # p_i = possible index. == number of elements left
+                # print(seq, p_i, seq[p_i], seq[element_count - p_i - 1])
                 if seq[p_i] == desired_char or seq[element_count - p_i - 1] == desired_char:
                     possible_yang += 1
                 if seq[p_i] == desired_char:
@@ -53,14 +54,14 @@ def evaluate_yinyang():
                 if seq[element_count - p_i - 1] == desired_char:
                     yang_indexes.add(element_count - p_i - 1)
             p_Y = possible_yang / len(seq)
+            print(seq, p_Y)
             tried[(seq, desired_char)] = (p_Y, yang_indexes)
             tried[(seq[::-1], desired_char)] = (p_Y, yang_indexes)
         
 
-        if picks_left == 1 or prevProb < 0.000000001:
-            # print(seq, yang_indexes, desired_char)
+        if picks_left == 1 or prevProb < 0.00000000001 or len(yang_indexes) == 0:
+            # print("final", seq, p_Y)
             if desired_char == "Y":
-                # print(seq, prevProb)
                 return prevProb * p_Y 
             else:
                 return 0
@@ -78,16 +79,17 @@ def evaluate_yinyang():
         #     if desired_char == "Y":
         #         new_sum += p_Y
         
+        sums = 0
         for index in yang_indexes:
             new_seq = seq[:index]+seq[index+1:]
             # val = 0
             # if (split, p_Y, new_seq, picks_left, sum, yinCount, yangCount) in tried.keys():
             #     val = tried[(split, p_Y, new_seq, picks_left, sum, yinCount, yangCount)]
             # else:
-            new_sum += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = prevProb*p_Y*split)
+            sums += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = prevProb*p_Y*split)
                 # tried[frozenset((split, p_Y, new_seq, picks_left, sum, yinCount, yangCount))] = val
             # new_sum += val
-
+        new_sum += sums
 
         return new_sum
 
