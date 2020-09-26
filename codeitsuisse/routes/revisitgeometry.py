@@ -1,6 +1,7 @@
 import logging
 import json
 from shapely.geometry import Polygon, LineString
+from shapely.geometry.multilinestring import MultiLineString
 
 from flask import request, jsonify;
 
