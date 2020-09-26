@@ -75,6 +75,6 @@ def evaluate_portfolio():                              ## Main Function
         output.append(best_index)
 
     # publish result
-    logging.info("My result :{}".format(output))
+    logging.info("outputs:{}".format(output))
     result = { "outputs": output}
     return json.dumps(result) 
