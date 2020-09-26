@@ -37,9 +37,11 @@ def evaluate_inventory():
                     counter += 1
             itemLst.append(res)
         
-        result = {'searchItemName': d['searchItemName'], 'searchResult': itemLst} 
+        result = {'searchItemName': d['searchItemName'], 'searchResult': itemLst}
 
-    resLst.append(result)
+        resLst.append(result)
+
+    
 
     logging.info("My result :{}".format(resLst))
     return json.dumps(resLst)
