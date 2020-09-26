@@ -20,7 +20,15 @@ def evaluate_cleanfloor():
         floor = tests[key]['floor']
         for i in range(len(floor) - 1):
             answer += 2*floor[i]
-            floor[i+1] = abs(floor[i+1] - floor[i])
+
+            if floor[i] > floor[i+1]:
+                diff = floor[i] - floor[i+1]
+                if diff % 2 == 0:
+                    floor[i+1] = 0
+                else:
+                    floor[i+1] = 1
+            else:
+                floor[i+1] = floor[i+1] - floor[i]
             
             if (i != len(floor)-2):
                 if floor[i+1] > 0:
