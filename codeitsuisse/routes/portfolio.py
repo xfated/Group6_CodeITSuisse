@@ -47,14 +47,14 @@ def evaluate_portfolio():                              ## Main Function
                     lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
                 # this future has lower vol or ratio
                 elif lowest['Vol'] > vol and lowest['Ratio'] < ratio :
-                    if lowest['Fut'] > future_round:
+                    if lowest['Fut'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
                 elif lowest['Vol'] < vol and lowest['Ratio'] > ratio:
-                    if lowest['Fut'] > future_round:
+                    if lowest['Fut'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
                 # Same metrics 
                 elif lowest['Vol'] == vol and lowest['Ratio'] == ratio:
-                    if lowest['Fut'] > future_round:
+                    if lowest['Fut'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
 
 
