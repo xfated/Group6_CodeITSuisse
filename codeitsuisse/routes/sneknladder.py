@@ -45,8 +45,8 @@ def evaluate_slsm():
             if smoky:
                 i = -i
             new_pos = cur_pos + i
-            if new_pos == 100:
-                best_pos = 100
+            if new_pos == boardSize:
+                best_pos = boardSize
                 best_roll = i
                 mirror, smoke = False, False
                 break
@@ -83,10 +83,11 @@ def evaluate_slsm():
             best_roll = -best_roll
         return best_pos, best_roll, mirror, smoke
         
-    while player_pos[last] < 100:
+    while player_pos[last] < boardSize:
         dice_rolls += [1] * (last) # give 1 for all other players
         best_pos, best_roll, mirror, smoke = go_next(player_pos[last], False)
         player_pos[last] = best_pos
+        print('here', player_pos[last])
         dice_rolls.append(best_roll)
         while mirror == True or smoke == True:
             if mirror:
@@ -97,6 +98,8 @@ def evaluate_slsm():
                 player_pos[last] = best_pos
                 dice_rolls.append(best_roll)
                 best_pos, best_roll, mirror, smoke = go_next(player_pos[last], True)
+            print('there', player_pos[last])
+    
     logging.info("My result :{}".format(dice_rolls))
     return json.dumps(dice_rolls)
 

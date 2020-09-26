@@ -1,6 +1,6 @@
 import logging
 import json
-# import Levenshtein
+import Levenshtein
 
 from flask import request, jsonify;
 
@@ -17,8 +17,8 @@ def evaluate_inventory():
     items = data[0]['items']
     items = [i.lower() for i in items]
 
-    # for i in items:
-    #     print(Levenshtein.editops(target, i))
+    for i in items:
+        print(Levenshtein.editops(target, i))
 
     logging.info("My result :{}".format(result))
     return json.dumps(result)
