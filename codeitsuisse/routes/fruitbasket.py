@@ -22,7 +22,7 @@ def evaluate_fruitbasket():
 
     estimate = int(math.ceil(estimate/100.0))*100
     logging.info("My result :{}".format(estimate))
-    return json.dumps(estimate)
+    return f'{estimate}'
 
 
 
