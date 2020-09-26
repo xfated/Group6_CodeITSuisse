@@ -16,14 +16,6 @@ def evaluate_yinyang():
     no_Operations = data['number_of_operations']
     elements = data['elements']
 
-    # yin_count = 0
-    # yang_count = 0
-    # for char in elements:
-    #     if char == "y":
-    #         yin_count += 1
-    #     else:
-    #         yang_count += 1
-    
     def get_yang_probability(seq, picks_left, sum, first = False):
         possible_yang = 0
         element_count = len(seq)
@@ -41,19 +33,16 @@ def evaluate_yinyang():
         p_Y = possible_yang / len(seq)
         
         if picks_left == 1:
-            print('no picks left', p_Y)
             return p_Y
         
         new_sum = sum
         split = 1/len(yang_indexes)
         for index in yang_indexes:
             val = split * p_Y * get_yang_probability(seq[:index]+seq[index+1:], picks_left - 1, sum)
-            print('val', val)
             new_sum += val
 
         if first:
             new_sum += p_Y
-            
         return new_sum
 
     result = get_yang_probability(elements,no_Operations,0, True)
