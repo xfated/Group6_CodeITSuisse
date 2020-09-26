@@ -45,9 +45,7 @@ def evaluate_gmo():
         if num_acgt % 2 != 0 and c_count % 2 == 0: # odd num of acgt but even number of C
             num_acgt -= 1
         num_cc = math.floor((c_count-num_acgt)/2)     
-
-        print(num_acgt, num_cc)
-
+        
         new_seq = ''
         a_inserted = False
         while len(new_seq) < gene_len:
