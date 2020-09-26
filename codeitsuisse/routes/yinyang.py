@@ -40,7 +40,7 @@ def evaluate_yinyang():
         # else:
         #     desired_char = 'y'
         #     yinCount -= 1
-
+        unreachable = []
         # element_count = no_Elements - pick_no + 1
         if (seq, desired_char) in tried.keys():
             p_Y, yang_indexes = tried[(seq, desired_char)]
@@ -49,6 +49,8 @@ def evaluate_yinyang():
                 # print(seq, p_i, seq[p_i], seq[element_count - p_i - 1])
                 if seq[p_i] == desired_char or seq[element_count - p_i - 1] == desired_char:
                     possible_yang += 1
+                else:
+                    unreachable.append(p_i)
                 if seq[p_i] == desired_char:
                     yang_indexes.add(p_i)
                 if seq[element_count - p_i - 1] == desired_char:
@@ -81,7 +83,11 @@ def evaluate_yinyang():
         sums = 0
         total = 0
         new_sets = {}
-        for index in range(len(seq)-1):
+        for index in yang_indexes:
+            new_seq = seq[:index]+seq[index+1:]
+            new_sets[new_seq] = new_sets.get(new_seq,0) + 1
+            total += 1
+        for index in unreachable:
             new_seq = seq[:index]+seq[index+1:]
             new_sets[new_seq] = new_sets.get(new_seq,0) + 1
             total += 1
@@ -93,6 +99,7 @@ def evaluate_yinyang():
             # new_sum += val
         for new_seq in new_sets.keys():
             split = new_sets[new_seq]/total
+            print(new_seq, split)
             sums += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = prevProb*p_Y*split)
             
         new_sum += sums
@@ -100,9 +107,9 @@ def evaluate_yinyang():
         return new_sum
 
     result = get_yang_probability(elements,no_Operations,0, y_count, Y_count, tried_dict, True)
-    result = float("{:.10f}".format(result))
+    result = "{:.10f}".format(result)
     logging.info("My result :{}".format(result))
-    return json.dumps(result)
+    return result
 
 
 
