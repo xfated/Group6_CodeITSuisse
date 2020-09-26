@@ -32,12 +32,11 @@ def evaluate_inventory():
                     res = res[:edit[1]+counter] + f'+{i[edit[2]]}' + res[edit[1]+counter:]
                     counter += 2 
                 elif edit[0] == 'replace':
-                    
                     res = res[:edit[1]+counter] + f'{i[edit[2]]}' + res[edit[1]+counter+1:]
                     counter += 1
             itemLst.append(res)
         
-        result = {'searchItemName': d['searchItemName'], 'searchResult': itemLst}
+        result = {'searchItemName': d['searchItemName'], 'searchResult': itemLst[:10]}
 
         resLst.append(result)
 
