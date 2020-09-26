@@ -68,6 +68,7 @@ def evaluate_contacttracing():
     else:
         # handle clusters
         for i in range(len(cluster_name)):
+            trace = ''
             if alterations(infected_genome, cluster_genome[i]) <= min_alterations:
                 min_alterations = alterations(infected_genome, cluster_genome[i])
                 if nonsilent(infected_genome, cluster_genome[i]):
@@ -75,20 +76,22 @@ def evaluate_contacttracing():
                 else:
                     trace = f'{infected_name} -> {cluster_name[i]}'
             
-            if alterations(cluster_genome[i], origin_genome) <= min_alterations:
+            if alterations(cluster_genome[i], origin_genome) <= min_alterations and cluster_genome[i] != origin_genome:
                 if nonsilent(cluster_genome[i], origin_genome):
                     trace += f'* -> {origin_name}'
                 else:
                     trace += f' -> {origin_name}'
-            result.append((trace, min_alterations))
+            if trace != '':
+                result.append((trace, min_alterations))
             
         if alterations(infected_genome, origin_genome) <= min_alterations: 
+            trace = ''
             min_alterations = alterations(infected_genome, origin_genome)
             if nonsilent(infected_genome, origin_genome):
                 trace = f'{infected_name}* -> {origin_name}'
             else:
                 trace = f'{infected_name} -> {origin_name}'
-            result.append((trace, 0))
+            result.append((trace, min_alterations))
     
     new_result = []
     for trace, alterations in result:
