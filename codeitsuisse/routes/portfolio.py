@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 @app.route('/optimizeportfolio', methods=['POST'])
 
-def evaluate_inventory():                              ## Main Function
+def evaluate_portfolio():                              ## Main Function
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
 
@@ -22,7 +22,7 @@ def evaluate_inventory():                              ## Main Function
     output = []
     for i in inputs:                                    #loop thru the dictionary
         port = i['Portfolio']
-        index = i['indexFutures']
+        index = i['IndexFutures']
         
         #Consider only between volatility of futures and ratio for conclusion
         #Port details
@@ -51,9 +51,9 @@ def evaluate_inventory():                              ## Main Function
                     if lowest['Fut'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, ratio, future_pro
         
-        best_index['NumFuturesContract'] = round(lowest['Fut'] * value)
-        best_index['OptimalHedgeRatio'] = round(lowest['Ratio'], 3)
         best_index['HedgePositionName'] = lowest['Name']
+        best_index['OptimalHedgeRatio'] = round(lowest['Ratio'], 3)
+        best_index['NumFuturesContract'] = round(lowest['Fut'] * value)
         output.append(best_index)
 
     # publish result
