@@ -46,14 +46,19 @@ def evaluate_portfolio():                              ## Main Function
                 if lowest['Vol'] > vol and lowest['ratio_comp'] > ratio:     
                     lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
                 # this future has lower vol or ratio
-                elif lowest['Vol'] > vol and lowest['ratio_comp'] < ratio :
+                elif lowest['Vol'] => vol and lowest['ratio_comp'] < ratio :
                     #compare lowest number of futures proportion 
                     if lowest['fut_compare'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
-                elif lowest['Vol'] < vol and lowest['ratio_comp'] > ratio:
+                elif lowest['Vol'] < vol and lowest['ratio_comp'] => ratio:
                     if lowest['fut_compare'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
-        
+                #Same metrics 
+                elif lowest['Vol'] == vol and lowest['ratio_comp'] == ratio:
+                    if lowest['fut_compare'] > future_pro:
+                        lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
+
+
         best_index['HedgePositionName'] = lowest['Name']
         best_index['OptimalHedgeRatio'] = lowest['Ratio']
         best_index['NumFuturesContract'] = lowest['Fut'] 
