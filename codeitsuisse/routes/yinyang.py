@@ -81,7 +81,7 @@ def evaluate_yinyang():
         sums = 0
         total = 0
         new_sets = {}
-        for index in yang_indexes:
+        for index in range(len(seq)-1):
             new_seq = seq[:index]+seq[index+1:]
             new_sets[new_seq] = new_sets.get(new_seq,0) + 1
             total += 1
