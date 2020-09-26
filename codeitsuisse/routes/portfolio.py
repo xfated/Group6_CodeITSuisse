@@ -40,7 +40,7 @@ def evaluate_portfolio():                              ## Main Function
             vol = j['FuturePrcVol']                              
 
             if not any(lowest):
-                lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round, ratio, future
+                lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_round
             else:
                 # this future has lower vol and ratio
                 if lowest['Vol'] > vol and lowest['Ratio'] > ratio:     
