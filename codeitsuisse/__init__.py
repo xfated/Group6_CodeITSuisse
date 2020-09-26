@@ -7,4 +7,6 @@ import codeitsuisse.routes.contacttracing
 import codeitsuisse.routes.salad
 import codeitsuisse.routes.gmo
 import codeitsuisse.routes.revisitgeometry
+import codeitsuisse.routes.portfolio
+
 
