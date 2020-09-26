@@ -1,17 +1,42 @@
-# import logging
-# import json
+import logging
+import json
 
-# from flask import request, jsonify;
+from flask import request, jsonify;
 
-# from codeitsuisse import app;
+from codeitsuisse import app;
 
-# logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
-# @app.route('/salad-spree', methods=['POST'])
+@app.route('/salad-spree', methods=['POST'])
 
-# You should be expecting the number of required salads to be smaller or equal to the number of shops per street. Both of these numbers should not exceed 100. 
-# will only buy salad from stores that are next to each other
-import re
+def evaluate_saladspree():                              ## Main Function
+    data = request.get_json()
+    logging.info("data sent for evaluation {}".format(data))
+
+    #get data
+    n = data['number_of_salads']
+    streets = data["salad_prices_street_map"]
+
+    final_cost = 10000000000
+    for i in streets:
+        consec, stores = consec_num(n,i)
+        if len(i) - count_X(i) < n:                 #if street does not have enough salads
+            temp = 0
+        elif consec < n:                            #check if have enough consecutive stores
+            temp = 0                             
+        else:
+            cost = get_cheapest_consec(n,stores)
+            if cost < final_cost:
+                final_cost = cost
+                
+    if final_cost == 10000000000:
+        final_cost = temp
+
+    # publish result
+    logging.info("result: {}".format(final_cost))
+    result = { "result" : final_cost}
+    return json.dumps(result)
+
 
 def count_X(street):
     count = street.count('X')
@@ -53,24 +78,4 @@ def get_cheapest_consec(n,street):
             return min_sum
             
 
-def salad_cost(n,streets):
-    final_cost = 10000000000
-    for i in streets:
-        consec, stores = consec_num(n,i)
-        if len(i) - count_X(i) < n:                 #if street does not have enough salads
-            temp = 0
-        elif consec < n:                     #check if have enough consecutive stores
-            temp = 0                             
-        else:
-            cost = get_cheapest_consec(n,stores)
-            if cost < final_cost:
-                final_cost = cost
-                
-    if final_cost == 10000000000:
-        final_cost = temp
-    return (f'result : {final_cost}')
-
-            
-
-            
 
