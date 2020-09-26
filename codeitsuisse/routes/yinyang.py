@@ -79,19 +79,21 @@ def evaluate_yinyang():
         #         new_sum += p_Y
         
         sums = 0
-        new_sets = set()
+        total = 0
+        new_sets = {}
         for index in yang_indexes:
             new_seq = seq[:index]+seq[index+1:]
-            new_sets.add(new_seq)
+            new_sets[new_seq] = new_sets.get(new_seq,0) + 1
+            total += 1
             # val = 0
             # if (split, p_Y, new_seq, picks_left, sum, yinCount, yangCount) in tried.keys():
             #     val = tried[(split, p_Y, new_seq, picks_left, sum, yinCount, yangCount)]
             # else:
                 # tried[frozenset((split, p_Y, new_seq, picks_left, sum, yinCount, yangCount))] = val
             # new_sum += val
-        for new_seq in new_sets:
-            split = 1/len(new_sets)
-            sums += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = prevProb*p_Y*split)
+        for new_seq in new_sets.keys():
+            split = new_sets[new_seq]/total
+            sums += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = p_Y*split)
             
         new_sum += sums
 
