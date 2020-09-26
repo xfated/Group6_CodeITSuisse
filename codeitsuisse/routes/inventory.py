@@ -1,6 +1,7 @@
 import logging
 import json
 import Levenshtein
+import operator
 
 from flask import request, jsonify;
 
@@ -23,6 +24,8 @@ def evaluate_inventory():
         for i in items:
             res = target
             target_copy = target
+            dist = Levenshtein.distance(target, i)
+
             counter = 0
             for edit in Levenshtein.editops(target, i):
                 if edit[0] == 'delete':
@@ -34,13 +37,12 @@ def evaluate_inventory():
                 elif edit[0] == 'replace':
                     res = res[:edit[1]+counter] + f'{i[edit[2]]}' + res[edit[1]+counter+1:]
                     counter += 1
-            itemLst.append(res)
+            itemLst.append((res, dist))
         
-        result = {'searchItemName': d['searchItemName'], 'searchResult': itemLst[:10]}
-
+        itemLst = sorted(itemLst, key=operator.itemgetter(1, 0))
+        itemLst = [x[0] for x in itemLst][:10]
+        result = {'searchItemName': d['searchItemName'], 'searchResult': itemLst}
         resLst.append(result)
-
-    
 
     logging.info("My result :{}".format(resLst))
     return json.dumps(resLst)
