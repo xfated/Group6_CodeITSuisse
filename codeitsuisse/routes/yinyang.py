@@ -26,14 +26,22 @@ def evaluate_yinyang():
     
 
     tried_dict = {}
-    def get_yang_probability(seq, picks_left, sum, yinCount, yangCount, tried, first = False):
+    def get_yang_probability(seq, picks_left, sum, yinCount, yangCount, yangChosen, tried, first = False):
+        if (yinCount == yangCount):
+            if picks_left % 2 == 0:
+                return picks_left / 2
+            else:
+                return picks_left / 2 + 1 
+        
         possible_yang = 0
         element_count = len(seq)
         p_Y = 0
         yang_indexes = set()
         desired_char = ''
+        
         if yinCount < yangCount:
             desired_char = 'Y'
+            yangChosen += 1
             yangCount -= 1 
         else:
             desired_char = 'y'
@@ -52,27 +60,30 @@ def evaluate_yinyang():
             p_Y = possible_yang / len(seq)
             tried[(seq, desired_char)] = (p_Y, yang_indexes)
             tried[(seq[::-1], desired_char)] = (p_Y, yang_indexes)
-        if picks_left == 1 or abs(Y_count - y_count) < 1:
-            # print(seq, yang_indexes, desired_char)
-            return p_Y
         
+        picks_left -= 1
+        if picks_left == 1:
+            # print(seq, yang_indexes, desired_char)
+            return p_Y * yangChosen  
+
+            
         new_sum = sum
         split = 1/len(yang_indexes)
         for index in yang_indexes:
             new_seq = seq[:index]+seq[index+1:]
-            val = 0
-            if (split, p_Y, new_seq, picks_left - 1, sum, yinCount, yangCount) in tried.keys():
-                val = tried[(split, p_Y, new_seq, picks_left - 1, sum, yinCount, yangCount)]
-            else:
-                val = split * p_Y * get_yang_probability(new_seq, picks_left - 1, sum, yinCount, yangCount, tried)
-                tried[frozenset((split, p_Y, new_seq, picks_left - 1, sum, yinCount, yangCount))] = val
+            # val = 0
+            # if (split, p_Y, new_seq, picks_left, sum, yinCount, yangCount) in tried.keys():
+            #     val = tried[(split, p_Y, new_seq, picks_left, sum, yinCount, yangCount)]
+            # else:
+            val = yangChosen * split * p_Y * get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, yangChosen, tried)
+                # tried[frozenset((split, p_Y, new_seq, picks_left, sum, yinCount, yangCount))] = val
             new_sum += val
 
         if first:
             new_sum += p_Y
         return new_sum
 
-    result = get_yang_probability(elements,no_Operations,0, y_count, Y_count, tried_dict, True)
+    result = get_yang_probability(elements,no_Operations,0, y_count, Y_count, 0, tried_dict, True)
     
     logging.info("My result :{}".format(result))
     return json.dumps(result)
