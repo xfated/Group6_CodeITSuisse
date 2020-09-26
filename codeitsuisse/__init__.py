@@ -4,5 +4,6 @@ import codeitsuisse.routes.square
 import codeitsuisse.routes.fruitbasket
 import codeitsuisse.routes.olympiadbabylon
 import codeitsuisse.routes.contacttracing
+import codeitsuisse.routes.salad
 
 
