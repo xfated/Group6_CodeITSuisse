@@ -49,7 +49,12 @@ def evaluate_revisitgeometry():
     if type(shapely_poly.intersection(shapely_line)) is MultiLineString:
         for inte in shapely_poly.intersection(shapely_line):
             intersection_line += list(inte.coords)
-        intersection_line = [item for item, count in collections.Counter(intersection_line).items() if count > 1]
+        new_lst = []
+        for t in intersection_line:
+            x = round(t[0], 2)
+            y = round(t[1], 2)
+            new_lst.append((x, y))
+        intersection_line = [item for item, count in collections.Counter(new_lst).items() if count > 1]
     else:
         intersection_line = list(shapely_poly.intersection(shapely_line).coords)
     # intersection_line = list(shapely_poly.intersection(shapely_line).coords)
