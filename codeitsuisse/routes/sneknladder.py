@@ -83,7 +83,7 @@ def evaluate_slsm():
             best_roll = -best_roll
         return best_pos, best_roll, mirror, smoke
         
-    while player_pos[last] != 100:
+    while player_pos[last] <= 100:
         dice_rolls += [1] * (last) # give 1 for all other players
         best_pos, best_roll, mirror, smoke = go_next(player_pos[last], False)
         player_pos[last] = best_pos
@@ -97,7 +97,6 @@ def evaluate_slsm():
                 player_pos[last] = best_pos
                 dice_rolls.append(best_roll)
                 best_pos, best_roll, mirror, smoke = go_next(player_pos[last], True)
-        print(player_pos[last])
     logging.info("My result :{}".format(dice_rolls))
     return json.dumps(dice_rolls)
 
