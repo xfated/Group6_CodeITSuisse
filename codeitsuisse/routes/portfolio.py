@@ -52,10 +52,10 @@ def evaluate_portfolio():                              ## Main Function
                 elif lowest['Vol'] < vol and lowest['ratio_comp'] > ratio:
                     if lowest['fut_compare'] > future_pro:
                         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
-                #Same metrics 
-                elif lowest['Vol'] == vol and lowest['ratio_comp'] == ratio:
-                    if lowest['fut_compare'] > future_pro:
-                        lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
+                # #Same metrics 
+                # elif lowest['Vol'] == vol and lowest['ratio_comp'] == ratio:
+                #     if lowest['fut_compare'] > future_pro:
+                #         lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'],lowest['ratio_comp'],lowest['fut_compare'] = name, vol, round_ratio, future_round, ratio, future_pro
 
 
         best_index['HedgePositionName'] = lowest['Name']
