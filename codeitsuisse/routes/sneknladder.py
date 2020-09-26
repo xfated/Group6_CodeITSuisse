@@ -79,7 +79,7 @@ def evaluate_slsm():
                     best_pos = new_pos
                     best_roll = i
                     mirror, smoke = False, False
-        if smoke:
+        if smoky:
             best_roll = -best_roll
         return best_pos, best_roll, mirror, smoke
         
