@@ -24,18 +24,20 @@ def evaluate_cleanfloor():
             if floor[cur_index-1] > floor[cur_index+1]:
                 cur_index -= 1
             elif floor[cur_index-1] == floor[cur_index+1]:
-                if sum(floor[:cur_index])>sum(floor[cur_index:]):
+                if sum(floor[:cur_index])>sum(floor[cur_index+1:]):
                     cur_index -=1
                 else:
                     cur_index +=1
             else:    
                 cur_index += 1
+
             if floor[cur_index] > 0:
                 floor[cur_index] -= 1
                 cur_sum -=1
             else:
                 floor[cur_index]  += 1
                 cur_sum += 1
+
             answer += 1
         output['answers'][key] = answer
         
