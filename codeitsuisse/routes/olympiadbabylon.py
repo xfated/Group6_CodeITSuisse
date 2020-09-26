@@ -11,8 +11,19 @@ logger = logging.getLogger(__name__)
 def evaluate_babylon():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
-    inputValue = data.get("input")
     
+    # get data
+    numBooks = data['numberOfBooks']
+    numDays = data['numberOfDays']
+    books = data['books']
+    days = data['days']
+
+    # get books in dict
+    book_dict = {}
+    for i in range(len(books)):
+        book_dict[i] = books[i]
+     
+
     result = 0
 
     # publish result
