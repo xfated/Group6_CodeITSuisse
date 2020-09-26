@@ -24,7 +24,7 @@ def evaluate_cleanfloor():
             if floor[cur_index-1] > floor[cur_index+1]:
                 cur_index -= 1
             elif floor[cur_index-1] == floor[cur_index+1]:
-                if sum(floor[:cur_index]>floor[cur_index:]):
+                if sum(floor[:cur_index])>sum(floor[cur_index:]):
                     cur_index -=1
                 else:
                     cur_index +=1
