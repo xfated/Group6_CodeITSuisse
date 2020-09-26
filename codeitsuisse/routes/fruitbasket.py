@@ -16,8 +16,10 @@ def evaluate_fruitbasket():
 
     estimate = 0
     # Parse data
-    for item in data.keys():
-        estimate += np.random.randint(1,100) * data[item]
+
+    print(data)
+    # for item in data.keys():
+    #     estimate += np.random.randint(1,100) * data[item]
 
     estimate = int(math.ceil(estimate/100.0))*100
     logging.info("My result :{}".format(estimate))
