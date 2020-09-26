@@ -39,19 +39,19 @@ def evaluate_portfolio():                              ## Main Function
             vol = j['FuturePrcVol']                              
 
             if not any(lowest):
-                lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, ratio, future_pro
+                lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_pro
             else:
                 # this future has lower vol and ratio
                 if lowest['Vol'] > vol and lowest['Ratio'] > ratio:     
-                    lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, ratio, future_pro
+                    lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_pro
                 # this future has lower vol or ratio
                 elif lowest['Vol'] > vol and lowest['Ratio'] < ratio:
                     #compare lowest number of futures proportion 
                     if lowest['Fut'] > future_pro:
-                        lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, ratio, future_pro
+                        lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_pro
                 elif lowest['Vol'] < vol and lowest['Ratio'] > ratio:
                     if lowest['Fut'] > future_pro:
-                        lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, ratio, future_pro
+                        lowest['Name'], lowest['Vol'], lowest['Ratio'], lowest['Fut'] = name, vol, round_ratio, future_pro
         
         best_index['HedgePositionName'] = lowest['Name']
         best_index['OptimalHedgeRatio'] = lowest['Ratio']
@@ -60,8 +60,5 @@ def evaluate_portfolio():                              ## Main Function
 
     # publish result
     logging.info("My result :{}".format(output))
-    result = { "outputs" : output}
+    result = { "outputs": output}
     return json.dumps(result)
-
-
-
