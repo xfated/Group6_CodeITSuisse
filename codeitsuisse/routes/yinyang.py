@@ -94,7 +94,7 @@ def evaluate_yinyang():
         return new_sum
 
     result = get_yang_probability(elements,no_Operations,0, y_count, Y_count, tried_dict, True)
-    
+    result = float("{:.10f}".format(result))
     logging.info("My result :{}".format(result))
     return json.dumps(result)
 
