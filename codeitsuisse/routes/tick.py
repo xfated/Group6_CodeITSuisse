@@ -35,7 +35,7 @@ def evaluate_tick():                              ## Main Function
         temp_list = []
         data = i.split(',')
         for j in data:
-            temp_list.append(int(j))
+            temp_list.append(int(float(j)))
         df_list.append(temp_list)
 
     columns_names = ['Open','High','Low','Close','Volume']
