@@ -76,14 +76,16 @@ def evaluate_bored():
         return sum([ord(char) for char in s])
         
     def checkSentence(s):#, dict):
-        for i in range(4,7):
+        count = 0
+        for i in range(4,8):
             for j in range(0, len(s)-i):
                 # if s[j:j+i] in setofwords:
                 #     print('sentence', s[j:i+1])
                 #     return True
                 # print(s[j:j+i])
                 if s[j:j+i] in setofwords:
-                    # print(s[j:j+i])
+                    count += 1
+                if count > 6:
                     return True
         else:
             return False
@@ -134,7 +136,6 @@ def evaluate_bored():
     #             return translated, key 
 
     for i in inputs:
-        print("settling", i)
         message = i['encryptedText']
         id_num = i['id']
         decrypt = {}
@@ -150,53 +151,55 @@ def evaluate_bored():
 
         encrpytionCount = 0    
         new_message = message
-        if checkSentence(new_message) == True:
-            isValid = True
+        try:
+            if checkSentence(new_message) == True:
+                isValid = True
 
-        count = 0
-        if numPalins == 0:
-            while isValid == False:
-                if count > 10: 
-                    break
-                # final_letter = new_message[0]
-                for i in range(0, 26):
-                    temp = shift(new_message,i)
-                    initial_letter = temp[0]
-                    desired_shift = (ord(initial_letter) - 97 % 26)
-                    # desired_shift = abs(ord(final_letter) - ord(initial_letter))
-                    if desired_shift == 26 - i:
-                        encryptionCount += 1
-                        new_message = temp
-                        if checkSentence(new_message) == True:
-                            isValid = True
+            count = 0
+            if numPalins == 0:
+                while isValid == False:
+                    if count > 50: 
                         break
-                count += 1
-                
-        else:
-            longestPalin = palins[-1]
-            while isValid == False:
-                if count > 10:
-                    break
-                for i in range(0,26):
-                    temp = shift(new_message,i)
-                    initLongestPalin = shift(longestPalin, i)
-                    desired_shift = (sumString(initLongestPalin) + numPalins)%26
-                    if desired_shift == 26 - i:
-                        encrpytionCount += 1
-                        new_message = temp
-                        longestPalin = initLongestPalin    
-                        if checkSentence(new_message) == True:
-                            isValid = True 
-                        # if 'racecar' in new_message:
-                        #     print("RACECAR")
+                    # final_letter = new_message[0]
+                    for i in range(1, 26):
+                        temp = shift(new_message,i)
+                        initial_letter = temp[0]
+                        desired_shift = (ord(initial_letter) - 97 % 26)
+                        # desired_shift = abs(ord(final_letter) - ord(initial_letter))
+                        if desired_shift == 26 - i:
+                            encryptionCount += 1
+                            new_message = temp
+                            if checkSentence(new_message) == True:
+                                isValid = True
+                            break
+                    count += 1
+                    
+            else:
+                longestPalin = palins[-1]
+                while isValid == False:
+                    if count > 50:
                         break
-                count += 1
-        originalText = new_message
-        # while checkSentence(message,dict_en) == False:
-        #     message = shift(message, 1)
-        #     print(message)
-        # originalText = message
-
+                    for i in range(1,26):
+                        temp = shift(new_message,i)
+                        initLongestPalin = shift(longestPalin, i)
+                        desired_shift = (sumString(initLongestPalin) + numPalins)%26
+                        if desired_shift == 26 - i:
+                            encrpytionCount += 1
+                            new_message = temp
+                            longestPalin = initLongestPalin    
+                            if checkSentence(new_message) == True:
+                                isValid = True 
+                            # if 'racecar' in new_message:
+                            #     print("RACECAR")
+                            break
+                    count += 1
+            originalText = new_message
+            # while checkSentence(message,dict_en) == False:
+            #     message = shift(message, 1)
+            #     print(message)
+            # originalText = message
+        except:
+            continue
         # encrpytionCount = 1
         answer = {}
         answer['id'] = id_num
