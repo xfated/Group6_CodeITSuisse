@@ -135,13 +135,17 @@ def evaluate_bored():
         # longest_palin = findpalin(message)              #find longest palindrome
         # solve, key = brute(longest_palin)               #find the word and key 
         
-        # isValid = False
-        # palins = findpalin(message)
-        # numPalins = len(palins)
+        isValid = False
+        palins = findpalin(message)
+        numPalins = len(palins)
             
+        new_message = message
+        # if numPalins = 0:
+        #     final_letter = new_message[0]
+        #     desired_shift = ord(new_message[0])
         # while isValid == False:
-
         #     if numPalins = 0:
+                
                 
         #     else:
         #         longestPalin = palins[-1]
