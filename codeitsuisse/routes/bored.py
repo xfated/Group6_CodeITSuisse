@@ -134,6 +134,7 @@ def evaluate_bored():
     #             return translated, key 
 
     for i in inputs:
+        print("settling", i)
         message = i['encryptedText']
         id_num = i['id']
         decrypt = {}
@@ -151,8 +152,12 @@ def evaluate_bored():
         new_message = message
         if checkSentence(new_message) == True:
             isValid = True
+
+        count = 0
         if numPalins == 0:
             while isValid == False:
+                if count > 10: 
+                    break
                 # final_letter = new_message[0]
                 for i in range(0, 26):
                     temp = shift(new_message,i)
@@ -165,9 +170,13 @@ def evaluate_bored():
                         if checkSentence(new_message) == True:
                             isValid = True
                         break
+                count += 1
+                
         else:
             longestPalin = palins[-1]
             while isValid == False:
+                if count > 10:
+                    break
                 for i in range(0,26):
                     temp = shift(new_message,i)
                     initLongestPalin = shift(longestPalin, i)
@@ -181,6 +190,7 @@ def evaluate_bored():
                         # if 'racecar' in new_message:
                         #     print("RACECAR")
                         break
+                count += 1
         originalText = new_message
         # while checkSentence(message,dict_en) == False:
         #     message = shift(message, 1)
@@ -188,7 +198,6 @@ def evaluate_bored():
         # originalText = message
 
         # encrpytionCount = 1
-
         answer = {}
         answer['id'] = id_num
         answer['encrpytionCount'] = encrpytionCount
