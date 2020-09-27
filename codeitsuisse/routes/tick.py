@@ -14,7 +14,6 @@ from codeitsuisse import app;
 logger = logging.getLogger(__name__)
 
 @app.route('/pre-tick', methods=['POST'])
-
 def evaluate_tick():                              ## Main Function
     
     data = request.get_json()
