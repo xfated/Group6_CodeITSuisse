@@ -85,7 +85,7 @@ def evaluate_bored():
                 # print(s[j:j+i])
                 if s[j:j+i] in setofwords:
                     count += 1
-                if count > 6:
+                if count > 5:
                     return True
         else:
             return False
@@ -167,7 +167,7 @@ def evaluate_bored():
                         desired_shift = (ord(initial_letter) - 97 % 26)
                         # desired_shift = abs(ord(final_letter) - ord(initial_letter))
                         if desired_shift == 26 - i:
-                            encryptionCount += 1
+                            encrpytionCount += 1
                             new_message = temp
                             if checkSentence(new_message) == True:
                                 isValid = True
@@ -203,12 +203,12 @@ def evaluate_bored():
         # encrpytionCount = 1
         answer = {}
         answer['id'] = id_num
-        answer['encrpytionCount'] = encrpytionCount
+        answer['encryptionCount'] = encrpytionCount
         answer['originalText'] = originalText
         output.append(answer)
         
     logging.info("My result :{}".format(output))
-    return json.dumps(output)
+    return jsonify(output)
 
 
 
