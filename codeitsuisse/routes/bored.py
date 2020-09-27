@@ -81,9 +81,9 @@ def evaluate_bored():
                 # if s[j:j+i] in setofwords:
                 #     print('sentence', s[j:i+1])
                 #     return True
-                print(s[j:j+i])
+                # print(s[j:j+i])
                 if s[j:j+i] in setofwords:
-                    print(s[j:j+i])
+                    # print(s[j:j+i])
                     return True
         else:
             return False
