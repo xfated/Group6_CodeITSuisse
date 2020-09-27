@@ -2,7 +2,7 @@ import logging
 import json
 from itertools import zip_longest
 from os import path
-import enchant
+# import enchant
 
 from flask import request, jsonify;
 
@@ -106,7 +106,7 @@ def evaluate_bored():
     #         if b is not None: yield b
 
     def brute(m):
-        d = enchant.Dict("en_US")
+        # d = enchant.Dict("en_US")
         LETTERS = 'abcdefghijklmnopqrstuvwxyz'
         for key in range(len(LETTERS)):
             translated = ''
@@ -122,8 +122,8 @@ def evaluate_bored():
                 else:
                     translated += symbol
 
-            if d.check(translated):
-                return translated, key 
+            # if d.check(translated):
+            #     return translated, key 
 
     for i in inputs:
         message = i['encryptedText']
@@ -131,7 +131,7 @@ def evaluate_bored():
         decrypt = {}
         encrpytionCount = 0
         originalText = ''
-        dict_en = enchant.Dict("en_US")
+        # dict_en = enchant.Dict("en_US")
         # longest_palin = findpalin(message)              #find longest palindrome
         # solve, key = brute(longest_palin)               #find the word and key 
         
@@ -149,9 +149,9 @@ def evaluate_bored():
                 
         #     else:
         #         longestPalin = palins[-1]
-        while checkSentence(message,dict_en) == False:
-            message = shift(message, 1)
-            print(message)
+        # while checkSentence(message,dict_en) == False:
+        #     message = shift(message, 1)
+        #     print(message)
         originalText = message
 
         encrpytionCount = 1
