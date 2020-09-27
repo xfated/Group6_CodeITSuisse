@@ -17,23 +17,25 @@ logger = logging.getLogger(__name__)
 @app.route('/pre-tick', methods=['POST'])
 def evaluate_tick():                              ## Main Function
     
-    data = request.get_json()
+    # data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
 
-    data = StringIO(data)
+    # data = StringIO(data)
 
-    inputs = data.split('\n')
-    df_list = []
+    # inputs = data.split('\n')
+    # df_list = []
     
-    for i in inputs:
-        temp_list = []
-        data = i.split(',')
-        for j in data:
-            temp_list.append(int(j))
-        df_list.append(temp_list)
+    # for i in inputs:
+    #     temp_list = []
+    #     data = i.split(',')
+    #     for j in data:
+    #         temp_list.append(int(j))
+    #     df_list.append(temp_list)
 
-    columns_names = ['Open','High','Low','Close','Volume']
-    df = pd.Dataframe(df_list, columns=columns_names)
+
+    df = pd.read_csv(request,sep=",")
+    # columns_names = ['Open','High','Low','Close','Volume']
+    # df = pd.Dataframe(df_list, columns=columns_names)
 
     # df = pd.read_csv(TESTDATA, sep=",", delimiter="\n")
 
