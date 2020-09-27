@@ -2,8 +2,6 @@ import logging
 import json
 from itertools import zip_longest
 from os import path
-import nltk
-nltk.download('words')
 
 from flask import request, jsonify;
 
