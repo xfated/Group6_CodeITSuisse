@@ -173,7 +173,6 @@ def evaluate_bored():
                     temp = shift(new_message,i)
                     initLongestPalin = shift(longestPalin, i)
                     desired_shift = (sumString(initLongestPalin) + numPalins)%26
-                    isValid = True
                     if desired_shift == 26 - i:
                         encrpytionCount += 1
                         new_message = temp
