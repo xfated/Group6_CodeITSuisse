@@ -26,7 +26,7 @@ def evaluate_yinyang():
     
 
     tried_dict = {}
-    def get_yang_probability(seq, picks_left, sum, yinCount, yangCount, tried, first = False, prevProb = 1):
+    def get_yang_probability(seq, picks_left, yinCount, yangCount, first = False, prevProb = 1):
         
         possible_yang = 0
         element_count = len(seq)
@@ -42,8 +42,8 @@ def evaluate_yinyang():
         #     yinCount -= 1
         unreachable = []
         # element_count = no_Elements - pick_no + 1
-        if (seq, desired_char) in tried.keys():
-            p_Y, yang_indexes = tried[(seq, desired_char)]
+        if (seq, desired_char) in tried_dict.keys():
+            p_Y, yang_indexes = tried_dict[(seq, desired_char)]
         else:
             for p_i in range(0, int(element_count)): # p_i = possible index. == number of elements left
                 # print(seq, p_i, seq[p_i], seq[element_count - p_i - 1])
@@ -57,21 +57,18 @@ def evaluate_yinyang():
                     yang_indexes.add(element_count - p_i - 1)
             p_Y = possible_yang / len(seq)
             # print(seq, p_Y)
-            tried[(seq, desired_char)] = (p_Y, yang_indexes)
-            tried[(seq[::-1], desired_char)] = (p_Y, yang_indexes)
+            tried_dict[(seq, desired_char)] = (p_Y, yang_indexes)
+            tried_dict[(seq[::-1], desired_char)] = (p_Y, yang_indexes)
         
 
         if picks_left == 1 or prevProb < 0.00000000001 or len(yang_indexes) == 0:
             # print("final", seq, p_Y)
-            if desired_char == "Y":
-                return prevProb * p_Y 
-            else:
-                return 0
+            return prevProb * p_Y
         picks_left -= 1
 
 
         # print(prevProb, p_Y)
-        new_sum = sum
+        new_sum = 0
     
         if desired_char == "Y":
             new_sum  += prevProb * p_Y
@@ -100,13 +97,13 @@ def evaluate_yinyang():
         for new_seq in new_sets.keys():
             split = new_sets[new_seq]/total
             # print(new_seq, split)
-            sums += get_yang_probability(new_seq, picks_left, sum, yinCount, yangCount, tried, prevProb = prevProb*p_Y*split)
+            sums += get_yang_probability(new_seq, picks_left, yinCount, yangCount, prevProb = prevProb*p_Y*split)
             
         new_sum += sums
 
         return new_sum
 
-    result = get_yang_probability(elements,no_Operations,0, y_count, Y_count, tried_dict, True)
+    result = get_yang_probability(elements,no_Operations, y_count, Y_count, True)
     result = "{:.10f}".format(result)
     logging.info("My result :{}".format(result))
     return result
