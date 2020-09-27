@@ -167,7 +167,7 @@ def evaluate_bored():
                         desired_shift = (ord(initial_letter) - 97 % 26)
                         # desired_shift = abs(ord(final_letter) - ord(initial_letter))
                         if desired_shift == 26 - i:
-                            encryptionCount += 1
+                            encrpytionCount += 1
                             new_message = temp
                             if checkSentence(new_message) == True:
                                 isValid = True
