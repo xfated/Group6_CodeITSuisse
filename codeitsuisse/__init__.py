@@ -14,3 +14,4 @@ import codeitsuisse.routes.socialdistance
 import codeitsuisse.routes.sneknladder
 import codeitsuisse.routes.inventory
 import codeitsuisse.routes.yinyang
+import codeitsuisse.routes.bored
