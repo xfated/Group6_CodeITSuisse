@@ -32,7 +32,8 @@ def evaluate_tick():                              ## Main Function
     #         temp_list.append(int(j))
     #     df_list.append(temp_list)
 
-    data = request.data 
+    data = request.data
+    data = data.decode("utf-8") 
     df = pd.read_csv(data,sep=",")
     # columns_names = ['Open','High','Low','Close','Volume']
     # df = pd.Dataframe(df_list, columns=columns_names)
