@@ -76,7 +76,7 @@ def evaluate_bored():
         return sum([ord(char) for char in s])
         
     def checkSentence(s):#, dict):
-        for i in range(4,len(s)):
+        for i in range(4,7):
             for j in range(0, len(s)-i):
                 # if s[j:j+i] in setofwords:
                 #     print('sentence', s[j:i+1])
@@ -149,11 +149,12 @@ def evaluate_bored():
 
         encrpytionCount = 0    
         new_message = message
+        if checkSentence(new_message) == True:
+            isValid = True
         if numPalins == 0:
             while isValid == False:
                 # final_letter = new_message[0]
-                for i in range(1, 26):
-                    print(i)
+                for i in range(0, 26):
                     temp = shift(new_message,i)
                     initial_letter = temp[0]
                     desired_shift = (ord(initial_letter) - 97 % 26)
@@ -167,7 +168,7 @@ def evaluate_bored():
         else:
             longestPalin = palins[-1]
             while isValid == False:
-                for i in range(1,26):
+                for i in range(0,26):
                     temp = shift(new_message,i)
                     initLongestPalin = shift(longestPalin, i)
                     desired_shift = (sumString(initLongestPalin) + numPalins)%26
