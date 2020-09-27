@@ -85,7 +85,7 @@ def evaluate_bored():
                 # print(s[j:j+i])
                 if s[j:j+i] in setofwords:
                     count += 1
-                if count > 6:
+                if count > 5:
                     return True
         else:
             return False
@@ -203,12 +203,12 @@ def evaluate_bored():
         # encrpytionCount = 1
         answer = {}
         answer['id'] = id_num
-        answer['encrpytionCount'] = encrpytionCount
+        answer['encryptionCount'] = encrpytionCount
         answer['originalText'] = originalText
         output.append(answer)
         
     logging.info("My result :{}".format(output))
-    return json.dumps(output)
+    return jsonify(output)
 
 
 
