@@ -22,21 +22,24 @@ def evaluate_tick():                              ## Main Function
 
     # data = StringIO(data)
 
-    # inputs = data.split('\n')
-    # df_list = []
-    
-    # for i in inputs:
-    #     temp_list = []
-    #     data = i.split(',')
-    #     for j in data:
-    #         temp_list.append(int(j))
-    #     df_list.append(temp_list)
+
 
     data = request.data
     data = data.decode("utf-8") 
-    df = pd.read_csv(data,sep=",")
-    # columns_names = ['Open','High','Low','Close','Volume']
-    # df = pd.Dataframe(df_list, columns=columns_names)
+
+
+    inputs = data.split('\n')
+    df_list = []
+    
+    for i in inputs:
+        temp_list = []
+        data = i.split(',')
+        for j in data:
+            temp_list.append(int(j))
+        df_list.append(temp_list)
+
+    columns_names = ['Open','High','Low','Close','Volume']
+    df = pd.Dataframe(df_list, columns=columns_names)
 
     # df = pd.read_csv(TESTDATA, sep=",", delimiter="\n")
 
