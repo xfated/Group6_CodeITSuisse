@@ -3,6 +3,7 @@ import json
 import math
 import numpy as np
 import pandas as pd
+from io import StringIO
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -19,6 +20,8 @@ def evaluate_tick():                              ## Main Function
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
 
+    data = StringIO(data)
+
     inputs = data.split('\n')
     df_list = []
     
@@ -31,6 +34,9 @@ def evaluate_tick():                              ## Main Function
 
     columns_names = ['Open','High','Low','Close','Volume']
     df = pd.Dataframe(df_list, columns=columns_names)
+
+    # df = pd.read_csv(TESTDATA, sep=",", delimiter="\n")
+
     df1 = df[['Close Price']]
 
     #Create a variable to predict 'x' days out into the future
